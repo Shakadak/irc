@@ -6,11 +6,12 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:44:14 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/20 17:44:16 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 14:40:19 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "server.h"
 
 void	do_select(t_env *e)
 {

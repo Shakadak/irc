@@ -8,16 +8,14 @@
 # define FD_CLIENT	2
 
 # define BUF_SIZE	4096
-
-# define Xv(err,res,str)	(x_void(err,res,str,__FILE__,__LINE__))
-# define X(err,res,str)		(x_int(err,res,str,__FILE__,__LINE__))
-# define MAX(a,b)	((a > b) ? a : b)
+# define NICK_SIZE	9
 
 # define USAGE		"Usage: %s port\n"
 
 typedef struct	s_fd
 {
 	int			type;
+	char		nick[NICK_SIZE + 1];
 	void		(*fct_read)();
 	void		(*fct_write)();
 	char		buf_read[BUF_SIZE + 1];
@@ -43,10 +41,11 @@ void			srv_accept(t_env *e, int s);
 void			client_read(t_env *e, int cs);
 void			client_write(t_env *e, int cs);
 void			clean_fd(t_fd *fd);
-int				x_int(int err, int res, char *str, char *file, int line);
-void			*x_void(void *err, void *res, char *str, char *file, int line);
+int				x_int(int err, int res, char *str);
+void			*x_void(void *err, void *res, char *str);
 void			init_fd(t_env *e);
 void			do_select(t_env *e);
 void			check_fd(t_env *e);
+int				command(int cs, t_env *e, int r);
 
-#endif /* !BIRCD_H_ */
+#endif

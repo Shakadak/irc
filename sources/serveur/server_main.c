@@ -6,9 +6,11 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:44:47 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/20 17:44:51 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 14:41:01 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "server.h"
 
 int	main(int ac, char **av)
 {

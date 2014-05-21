@@ -6,12 +6,13 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:44:40 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/20 17:44:42 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 17:21:42 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-# include <sys/select.h>
+#include <sys/select.h>
+#include "server.h"
 
 void	init_fd(t_env *e)
 {
@@ -28,7 +29,7 @@ void	init_fd(t_env *e)
 			FD_SET(i, &e->fd_read);
 			if (strlen(e->fds[i].buf_write) > 0)
 				FD_SET(i, &e->fd_write);
-			e->max = MAX(e->max, i);
+			e->max = (e->max < i ? i : e->max);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/08 10:39:32 by npineau           #+#    #+#              #
-#    Updated: 2014/05/20 17:14:52 by npineau          ###   ########.fr        #
+#    Updated: 2014/05/21 17:22:16 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRCSRV	:=	server_check_fd.c \
 			server_main_loop.c \
 			server_srv_accept.c \
 			server_srv_create.c \
+			server_command.c \
 			server_x.c
 OBJSRV	:=	$(SRCSRV:.c=.o)
 OBJCLI	:=	$(SRCCLI:.c=.o)

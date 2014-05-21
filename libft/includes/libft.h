@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 11:00:59 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/06 12:53:40 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 17:03:50 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define LIBFT_H
 # include <string.h>
 
-# define BUFF_SIZE 32
+# ifndef BUFF_SIZE
+#  define BUFF_SIZE 32
+# endif
 
 typedef struct		s_list
 {

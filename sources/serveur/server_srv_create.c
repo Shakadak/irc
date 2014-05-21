@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:17:59 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/20 17:18:01 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 14:51:01 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void			srv_create(t_env *e, int port)
 	struct sockaddr_in	sin;
 	struct protoent	*pe;
 
-	pe = (struct protoent*)Xv(NULL, getprotobyname("tcp"), "getprotobyname");
-	s = X(-1, socket(PF_INET, SOCK_STREAM, pe->p_proto), "socket");
+	pe = (struct protoent*)x_void(NULL, getprotobyname("tcp"), "getprotobyname");
+	s = x_int(-1, socket(PF_INET, SOCK_STREAM, pe->p_proto), "socket");
 	sin.sin_family = AF_INET;
 	sin.sin_addr.s_addr = INADDR_ANY;
 	sin.sin_port = htons(port);
-	X(-1, bind(s, (struct sockaddr*)&sin, sizeof(sin)), "bind");
-	X(-1, listen(s, 42), "listen");
+	x_int(-1, bind(s, (struct sockaddr*)&sin, sizeof(sin)), "bind");
+	x_int(-1, listen(s, 42), "listen");
 	e->fds[s].type = FD_SERV;
 	e->fds[s].fct_read = srv_accept;
+	print_server(s);
 }

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server_get_opt.c                                   :+:      :+:    :+:   */
+/*   server_command.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/05/20 17:44:27 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 14:40:28 by npineau          ###   ########.fr       */
+/*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
+/*   Updated: 2014/05/21 17:17:10 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <unistd.h>
+#include <sys/socket.h>
 #include "server.h"
+#include "libft.h"
 
-void	get_opt(t_env *e, int ac, char **av)
+static void	change_nick(int cs, t_env *e)
 {
-  if (ac != 2)
-    {
-      fprintf(stderr, USAGE, av[0]);
-      exit(1);
-    }
-  e->port = atoi(av[1]);
+	ft_strncpy(e->fds[cs].nick, e->fds[cs].buf_read + 6, NICK_SIZE);
+	send(cs, "Nickname successfully changed !\n", 32, 0);
 }
 
+int			command(int cs, t_env *e, int r)
+{
+	if (*(e->fds[cs].buf_read) != '/')
+		return (0);
+	e->fds[cs].buf_read[r] = 0;
+	if (!strncmp(e->fds[cs].buf_read, "/nick ", 6))
+		change_nick(cs, e);
+	return (1);
+}

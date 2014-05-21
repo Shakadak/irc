@@ -6,9 +6,11 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:44:56 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/20 17:44:58 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 14:41:07 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "server.h"
 
 void	main_loop(t_env *e)
 {
