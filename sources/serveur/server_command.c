@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 17:43:07 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 17:53:35 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 static void	change_nick(int cs, t_env *e)
 {
 	ft_strncpy(e->fds[cs].nick, e->fds[cs].buf_read + 6, NICK_SIZE);
-	send(cs, "Nickname successfully changed !\n", 32, 0);
+	send(cs, "Nickname changed to: ", 21, 0);
+	send(cs, e->fds[cs].nick, ft_strlen(e->fds[cs].nick), 0);
+	send(cs, "\n", 1, 0);
 }
 
 int			command(int cs, t_env *e, int r)
