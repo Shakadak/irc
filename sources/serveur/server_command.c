@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 17:17:10 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/21 17:43:07 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			command(int cs, t_env *e, int r)
 {
 	if (*(e->fds[cs].buf_read) != '/')
 		return (0);
-	e->fds[cs].buf_read[r] = 0;
+	e->fds[cs].buf_read[r - 1] = 0;
 	if (!strncmp(e->fds[cs].buf_read, "/nick ", 6))
 		change_nick(cs, e);
 	return (1);
