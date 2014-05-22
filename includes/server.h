@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 15:21:28 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 16:18:10 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # define BUF_SIZE	4096
 # define NICK_SIZE	9
+# define CHAN_SIZE	200
 
 # define USAGE		"Usage: %s port\n"
 
@@ -28,7 +29,7 @@ typedef struct	s_fd
 {
 	int			type;
 	char		nick[NICK_SIZE + 1];
-	int			channel;
+	char		channel[CHAN_SIZE + 1];
 	void		(*fct_read)();
 	void		(*fct_write)();
 	char		buf_read[BUF_SIZE + 1];

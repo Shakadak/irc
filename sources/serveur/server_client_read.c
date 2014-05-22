@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:30:54 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 15:14:43 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 16:24:35 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 #include "server.h"
 #include "libft.h"
 
-static void	spread(int cs, t_env *e, int r, int chan)
+static void	spread(int cs, t_env *e, int r, char *chan)
 {
 	int	i;
 
-	if (e->fds[cs].channel < 0)
+	if (*e->fds[cs].channel < 0)
 	{
 		send(cs, "Please, join a channel.\n", 24, 0);
 		return ;
@@ -28,7 +28,7 @@ static void	spread(int cs, t_env *e, int r, int chan)
 	i = 0;
 	while (i < e->maxfd)
 	{
-		if (e->fds[i].type == FD_CLIENT && i != cs && e->fds[i].channel == chan)
+		if (e->fds[i].type == FD_CLIENT && ft_strequ(e->fds[i].channel, chan))
 		{
 			send(i, e->fds[cs].nick, NICK_SIZE, 0);
 			send(i, ": ", 2, 0);

@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:17:59 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 15:18:33 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 16:23:36 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void			srv_create(t_env *e, int port)
 	struct protoent		*p;
 
 	p = (struct protoent*)x_void(NULL, getprotobyname("tcp"), "getprotobyname");
-	s = x_int(-1, socket(PF_INET, SOCK_STREAM, pe->p_proto), "socket");
+	s = x_int(-1, socket(PF_INET, SOCK_STREAM, p->p_proto), "socket");
 	sin.sin_family = AF_INET;
 	sin.sin_addr.s_addr = INADDR_ANY;
 	sin.sin_port = htons(port);
