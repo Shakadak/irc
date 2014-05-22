@@ -16,6 +16,7 @@ typedef struct	s_fd
 {
 	int			type;
 	char		nick[NICK_SIZE + 1];
+	int			channel;
 	void		(*fct_read)();
 	void		(*fct_write)();
 	char		buf_read[BUF_SIZE + 1];

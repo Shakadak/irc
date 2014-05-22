@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:45:09 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 17:48:38 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 13:14:02 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void			srv_accept(t_env *e, int s)
 	ft_strdel(&tmp);
 	send(cs, "logged as: ", 11, 0);
 	send(cs, e->fds[cs].nick, ft_strlen(e->fds[cs].nick), 0);
-	send(cs, "\n", 1, 0);
+	send(cs, "\nPlease, join a channel.\n", 25, 0);
 	e->fds[cs].fct_read = client_read;
+	e->fds[cs].channel = -1;
 	e->fds[cs].fct_write = client_write;
 }
