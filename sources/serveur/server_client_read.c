@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:30:54 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 16:24:35 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 17:15:33 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "server.h"
 #include "libft.h"
 
-static void	spread(int cs, t_env *e, int r, char *chan)
+void	spread(int cs, t_env *e, int r, char *chan)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ static void	spread(int cs, t_env *e, int r, char *chan)
 	}
 }
 
-void		client_read(t_env *e, int cs)
+void	client_read(t_env *e, int cs)
 {
 	int	r;
 

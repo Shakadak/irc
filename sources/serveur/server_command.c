@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 16:38:57 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 17:35:40 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,8 @@ static void	join(int cs, t_env *e, char *chan)
 		return ;
 	}
 	ft_strncpy(e->fds[cs].channel, chan, CHAN_SIZE);
-	send(cs, "Channel changed to: ", 20, 0);
-	send(cs, chan, ft_strlen(chan), 0);
-	send(cs, ".\n", 2, 0);
+	ft_strcpy(e->fds[cs].buf_read, "joined the channel\n");
+	spread(cs, e, 19, e->fds[cs].channel);
 }
 
 static void	who(int cs, t_env *e)
@@ -54,9 +53,8 @@ static void	who(int cs, t_env *e)
 		if (e->fds[i].type == FD_CLIENT && ft_strequ(e->fds[i].channel, chan))
 		{
 			if (i == cs)
-				send(cs, "You", 3, 0);
-			else
-				send(cs, e->fds[i].nick, NICK_SIZE, 0);
+				send(cs, "You : ", 6, 0);
+			send(cs, e->fds[i].nick, NICK_SIZE, 0);
 			send(cs, "\n", 1, 0);
 		}
 		i++;
@@ -77,8 +75,9 @@ static void	leave(int cs, t_env *e)
 		send(cs, "Can't leave a channel you aren't in\n", 36, 0);
 		return ;
 	}
+	ft_strcpy(e->fds[cs].buf_read, "left the channel\n");
+	spread(cs, e, 17, e->fds[cs].channel);
 	*e->fds[cs].channel = -1;
-	send(cs, "Channel left.\n", 14, 0);
 }
 
 int			command(int cs, t_env *e, int r)
