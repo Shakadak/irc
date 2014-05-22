@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 16:26:21 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 16:38:57 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ int			command(int cs, t_env *e, int r)
 	if (*(e->fds[cs].buf_read) != '/')
 		return (0);
 	e->fds[cs].buf_read[r - 1] = 0;
-	if (!strncmp(e->fds[cs].buf_read, "/nick ", 6))
+	if (ft_strnequ(e->fds[cs].buf_read, "/nick ", 6))
 		change_nick(cs, e);
-	else if (!strncmp(e->fds[cs].buf_read, "/join #", 7))
+	else if (ft_strnequ(e->fds[cs].buf_read, "/join #", 7))
 		join(cs, e, e->fds[cs].buf_read + 7);
-	else if (!strncmp(e->fds[cs].buf_read, "/leave", 5))
+	else if (ft_strnequ(e->fds[cs].buf_read, "/leave", 5))
 		leave(cs, e);
-	else if (!strcmp(e->fds[cs].buf_read, "/who"))
+	else if (ft_strequ(e->fds[cs].buf_read, "/who"))
 		who(cs, e);
 	else
 		send(cs, "Unknown command.\n", 17, 0);
