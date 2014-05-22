@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 13:13:22 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 13:34:21 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,32 @@ static void	join(int cs, t_env *e, int channel)
 	ft_strdel(&chan);
 }
 
+static void	who(int cs, t_env *e)
+{
+	int		i;
+	int		chan;
+
+	chan = e->fds[cs].channel;
+	i = 0;
+	if (chan < 0)
+	{
+		send(cs, "Please, join a channel.\n", 24, 0);
+		return ;
+	}
+	while (i < e->maxfd)
+	{
+		if (e->fds[i].type == FD_CLIENT && e->fds[i].channel == chan)
+		{
+			if (i == cs)
+				send(cs, "You", 3, 0);
+			else
+				send(cs, e->fds[i].nick, NICK_SIZE, 0);
+			send(cs, "\n", 1, 0);
+		}
+		i++;
+	}
+}
+
 int			command(int cs, t_env *e, int r)
 {
 	if (*(e->fds[cs].buf_read) != '/')
@@ -50,5 +76,7 @@ int			command(int cs, t_env *e, int r)
 		change_nick(cs, e);
 	if (!strncmp(e->fds[cs].buf_read, "/join ", 6))
 		join(cs, e, ft_atoi(e->fds[cs].buf_read + 6));
+	if (!strncmp(e->fds[cs].buf_read, "/who", 4))
+		who(cs, e);
 	return (1);
 }
