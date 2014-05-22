@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 14:38:44 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 14:39:04 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 15:14:21 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	check_fd(t_env *e)
 			e->fds[i].fct_read(e, i);
 		if (FD_ISSET(i, &e->fd_write))
 			e->fds[i].fct_write(e, i);
-		if (FD_ISSET(i, &e->fd_read) ||
-				FD_ISSET(i, &e->fd_write))
+		if (FD_ISSET(i, &e->fd_read) || FD_ISSET(i, &e->fd_write))
 			e->r--;
 		i++;
 	}

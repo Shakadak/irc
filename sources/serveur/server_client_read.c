@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:30:54 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 13:12:43 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 15:14:43 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	spread(int cs, t_env *e, int r, int chan)
 	}
 }
 
-void	client_read(t_env *e, int cs)
+void		client_read(t_env *e, int cs)
 {
 	int	r;
 

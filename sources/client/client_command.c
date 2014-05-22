@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/17 13:35:17 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/18 16:34:10 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 15:17:04 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ static void	send_ls(int sock)
 	while ((r = recv(sock, buff, 511, 0)))
 	{
 		if (buff[0] == SUCCESS && r == 1)
-			break;
+			break ;
 		buff[r] = 0;
 		ft_putstr(buff);
 	}
 }
 
-int	find_cmd(int sock, char *buff)
+int			find_cmd(int sock, char *buff)
 {
 	char	*tmp;
 

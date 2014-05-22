@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:44:27 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 14:40:28 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 15:15:10 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 
 void	get_opt(t_env *e, int ac, char **av)
 {
-  if (ac != 2)
-    {
-      fprintf(stderr, USAGE, av[0]);
-      exit(1);
-    }
-  e->port = atoi(av[1]);
+	if (ac != 2)
+	{
+		fprintf(stderr, USAGE, av[0]);
+		exit(1);
+	}
+	e->port = atoi(av[1]);
 }
-

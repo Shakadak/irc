@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:17:59 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 14:51:01 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 15:18:33 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 #include "server.h"
 
-static void	print_server(int sock)
+static void		print_server(int sock)
 {
 	struct sockaddr_in	sin;
 	socklen_t			len;
@@ -30,11 +30,11 @@ static void	print_server(int sock)
 
 void			srv_create(t_env *e, int port)
 {
-	int			s;
+	int					s;
 	struct sockaddr_in	sin;
-	struct protoent	*pe;
+	struct protoent		*p;
 
-	pe = (struct protoent*)x_void(NULL, getprotobyname("tcp"), "getprotobyname");
+	p = (struct protoent*)x_void(NULL, getprotobyname("tcp"), "getprotobyname");
 	s = x_int(-1, socket(PF_INET, SOCK_STREAM, pe->p_proto), "socket");
 	sin.sin_family = AF_INET;
 	sin.sin_addr.s_addr = INADDR_ANY;
