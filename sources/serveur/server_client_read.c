@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:30:54 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 17:15:33 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 18:03:57 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	spread(int cs, t_env *e, int r, char *chan)
 
 	if (*e->fds[cs].channel < 0)
 	{
-		send(cs, "Please, join a channel.\n", 24, 0);
+		ft_strcat(e->fds[cs].buf_write, "Please, join a channel.\n");
 		return ;
 	}
 	i = 0;

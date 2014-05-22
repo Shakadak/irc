@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 17:35:40 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 18:00:01 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 static void	change_nick(int cs, t_env *e)
 {
 	ft_strncpy(e->fds[cs].nick, e->fds[cs].buf_read + 6, NICK_SIZE);
-	send(cs, "Nickname changed to: ", 21, 0);
-	send(cs, e->fds[cs].nick, ft_strlen(e->fds[cs].nick), 0);
-	send(cs, ".\n", 2, 0);
+	ft_strcat(e->fds[cs].buf_write, "Nickname changed to: ");
+	ft_strcat(e->fds[cs].buf_write, e->fds[cs].nick);
+	ft_strcat(e->fds[cs].buf_write, ".\n");
 }
 
 static void	join(int cs, t_env *e, char *chan)
@@ -45,7 +45,7 @@ static void	who(int cs, t_env *e)
 	i = 0;
 	if (*chan < 0)
 	{
-		send(cs, "Please, join a channel.\n", 24, 0);
+		ft_strcat(e->fds[cs].buf_write, "Please, join a channel.\n");
 		return ;
 	}
 	while (i < e->maxfd)
@@ -53,9 +53,9 @@ static void	who(int cs, t_env *e)
 		if (e->fds[i].type == FD_CLIENT && ft_strequ(e->fds[i].channel, chan))
 		{
 			if (i == cs)
-				send(cs, "You : ", 6, 0);
-			send(cs, e->fds[i].nick, NICK_SIZE, 0);
-			send(cs, "\n", 1, 0);
+				ft_strcat(e->fds[cs].buf_write, "You : ");
+			ft_strcat(e->fds[cs].buf_write, e->fds[i].nick);
+			ft_strcat(e->fds[cs].buf_write, "\n");
 		}
 		i++;
 	}
@@ -72,10 +72,10 @@ static void	leave(int cs, t_env *e)
 		return ;
 	if (!ft_strequ(e->fds[cs].channel, chan))
 	{
-		send(cs, "Can't leave a channel you aren't in\n", 36, 0);
+		ft_strcat(e->fds[cs].buf_write, "Can't leave this channel.\n");
 		return ;
 	}
-	ft_strcpy(e->fds[cs].buf_read, "left the channel\n");
+	ft_strcpy(e->fds[cs].buf_read, "left the channel.\n");
 	spread(cs, e, 17, e->fds[cs].channel);
 	*e->fds[cs].channel = -1;
 }
@@ -94,6 +94,6 @@ int			command(int cs, t_env *e, int r)
 	else if (ft_strequ(e->fds[cs].buf_read, "/who"))
 		who(cs, e);
 	else
-		send(cs, "Unknown command.\n", 17, 0);
+		ft_strcat(e->fds[cs].buf_write, "Unknown command.\n");
 	return (1);
 }
