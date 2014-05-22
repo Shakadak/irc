@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 18:00:01 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/22 18:09:04 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static void	leave(int cs, t_env *e)
 		return ;
 	}
 	ft_strcpy(e->fds[cs].buf_read, "left the channel.\n");
-	spread(cs, e, 17, e->fds[cs].channel);
+	spread(cs, e, 18, e->fds[cs].channel);
 	*e->fds[cs].channel = -1;
 }
 
