@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 12:32:39 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 12:38:25 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int			command(int cs, t_env *e, int r)
 		who(cs, e);
 	else
 		ft_strcat(e->fds[cs].buf_write, "Unknown command.\n");
-	ft_array_free(&arg);
+	ft_array_free((void ***)&aarg);
 	return (1);
 }
