@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 12:02:43 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 12:52:38 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ void			spread(int cs, t_env *e, int r, char *chan);
 void			join(int cs, t_env *e, char *chan);
 void			leave(int cs, t_env *e, char *chan);
 void			who(int cs, t_env *e);
+int				get_dest(t_env *e, char *target);
+void			msg(int cs, t_env *e, char **arg);
 
 #endif
