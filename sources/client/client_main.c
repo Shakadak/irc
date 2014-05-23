@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/16 16:40:05 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 15:13:14 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 18:23:57 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	usage(char *prog)
 	return (-1);
 }
 
-int			main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	int		sock;
 	char	*buff;
@@ -46,6 +46,7 @@ int			main(int argc, char **argv)
 		return (-1);
 	while (get_next_line(0, &buff) > 0)
 	{
+		get_next_line(0, &buff);
 		if (find_cmd(sock, buff) == 0)
 			break ;
 	}
