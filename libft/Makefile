@@ -6,7 +6,7 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2013/11/20 12:15:41 by npineau           #+#    #+#              #
-#    Updated: 2014/05/06 13:19:11 by npineau          ###   ########.fr        #
+#    Updated: 2014/05/23 12:23:46 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ LST			:=	ft_lstadd.c \
 				ft_lstmap.c \
 				ft_lstnew.c
 
-MEM			:=	ft_bzero.c \
+MEM			:=	ft_array_free.c \
+				ft_bzero.c \
 				ft_memalloc.c \
 				ft_memccpy.c \
 				ft_memchr.c \

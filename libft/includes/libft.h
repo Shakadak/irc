@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/11/20 11:00:59 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 17:03:50 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 12:34:11 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 
-# ifndef BUFF_SIZE
-#  define BUFF_SIZE 32
-# endif
+# define BUFF_SIZE 32
 
 typedef struct		s_list
 {
@@ -36,6 +34,7 @@ int					ft_isspace(char c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 
+void				ft_array_free(void ***array);
 void				ft_bzero(void *src, size_t length);
 void				*ft_memchr(const void *ptr, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
