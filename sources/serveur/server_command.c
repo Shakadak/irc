@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 13:30:03 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 15:19:44 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ static void	change_nick(int cs, t_env *e, char *nick)
 	}
 }
 
+static void	help(int cs, t_env *e)
+{
+	ft_strcat(e->fds[cs].buf_write, "\n/nick <nickname(max 9 characters,\
+otherwise will be truncated)>\n/join <#chan>\n/leave [#currentchan]\n\
+/msg <nick> <message>\n/who\n\n");
+}
+
 int			command(int cs, t_env *e, int r)
 {
 	char	**aarg;
@@ -63,6 +70,8 @@ int			command(int cs, t_env *e, int r)
 		leave(cs, e, aarg[1]);
 	else if (ft_strequ(aarg[0], "/who"))
 		who(cs, e);
+	else if (ft_strequ(aarg[0], "/help"))
+		help(cs, e);
 	else
 		ft_strcat(e->fds[cs].buf_write, "Unknown command.\n");
 	ft_array_free((void **)aarg);

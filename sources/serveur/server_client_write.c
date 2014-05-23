@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:31:09 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 17:48:09 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 17:24:39 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 
 void	client_write(t_env *e, int cs)
 {
-	if (*e->fds[cs].buf_write)
+	int	len;
+
+	len = ft_strlen(e->fds[cs].buf_write);
+	if (len)
 	{
 		send(cs, e->fds[cs].buf_write, ft_strlen(e->fds[cs].buf_write), 0);
-		ft_strclr(e->fds[cs].buf_write);
+		ft_bzero(e->fds[cs].buf_write, BUF_SIZE);
 	}
 }

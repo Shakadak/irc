@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:30:54 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 18:03:57 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 17:44:20 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "server.h"
 #include "libft.h"
 
-void	spread(int cs, t_env *e, int r, char *chan)
+void	spread(int cs, t_env *e, char *chan, char *msg)
 {
 	int	i;
 
@@ -29,11 +29,7 @@ void	spread(int cs, t_env *e, int r, char *chan)
 	while (i < e->maxfd)
 	{
 		if (e->fds[i].type == FD_CLIENT && ft_strequ(e->fds[i].channel, chan))
-		{
-			send(i, e->fds[cs].nick, NICK_SIZE, 0);
-			send(i, ": ", 2, 0);
-			send(i, e->fds[cs].buf_read, r, 0);
-		}
+			ft_strcat(e->fds[i].buf_write, msg);
 		i++;
 	}
 }
@@ -42,7 +38,7 @@ void	client_read(t_env *e, int cs)
 {
 	int	r;
 
-	r = recv(cs, e->fds[cs].buf_read, BUF_SIZE, 0);
+	r = x_int(-1, recv(cs, e->fds[cs].buf_read, BUF_SIZE, 0), "recv");
 	if (r <= 0)
 	{
 		close(cs);
@@ -51,8 +47,12 @@ void	client_read(t_env *e, int cs)
 	}
 	else
 	{
-		if (command(cs, e, r))
-			return ;
-		spread(cs, e, r, e->fds[cs].channel);
+		if (!command(cs, e, r))
+		{
+			spread(cs, e, e->fds[cs].channel, e->fds[cs].nick);
+			spread(cs, e, e->fds[cs].channel, ": ");
+			spread(cs, e, e->fds[cs].channel, e->fds[cs].buf_read);
+		}
+		ft_strclr(e->fds[cs].buf_read);
 	}
 }

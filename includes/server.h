@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 12:52:38 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 17:34:15 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void			init_fd(t_env *e);
 void			do_select(t_env *e);
 void			check_fd(t_env *e);
 int				command(int cs, t_env *e, int r);
-void			spread(int cs, t_env *e, int r, char *chan);
+void			spread(int cs, t_env *e, char *chan, char *msg);
 
 void			join(int cs, t_env *e, char *chan);
 void			leave(int cs, t_env *e, char *chan);

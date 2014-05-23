@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/23 11:43:21 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 12:02:17 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/23 17:33:41 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	join(int cs, t_env *e, char *chan)
 	if (chan == NULL)
 		ft_strcat(e->fds[cs].buf_write, "Channel missing.\n");
 	else if (*chan != '#')
-		ft_strcat(e->fds[cs].buf_write, "Invalid channel.\n");
+		ft_strcat(e->fds[cs].buf_write, "Invalid channel. (eg: #bananez)\n");
 	else
 	{
 		ft_strncpy(e->fds[cs].channel, chan, CHAN_SIZE);
-		ft_strcpy(e->fds[cs].buf_read, "joined the channel\n");
-		spread(cs, e, 19, e->fds[cs].channel);
+		spread(cs, e, e->fds[cs].channel, e->fds[cs].nick);
+		spread(cs, e, e->fds[cs].channel, " joined the channel.\n");
 	}
 }
 
@@ -62,7 +62,7 @@ void	leave(int cs, t_env *e, char *chan)
 			return ;
 		}
 	}
-	ft_strcpy(e->fds[cs].buf_read, "left the channel.\n");
-	spread(cs, e, 18, e->fds[cs].channel);
+	spread(cs, e, e->fds[cs].channel, e->fds[cs].nick);
+	spread(cs, e, e->fds[cs].channel, " left the channel.\n");
 	*e->fds[cs].channel = -1;
 }
