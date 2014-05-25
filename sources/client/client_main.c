@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/16 16:40:05 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 13:20:21 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 17:55:38 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,29 +27,21 @@ static int	ft_isnum(char *str)
 
 static int	usage(char *prog)
 {
-	ft_putstr("Usage: ");
-	ft_putstr(prog);
-	ft_putendl(" <addr(number.number.number.number)> <port(number)>");
+	ft_putstr_fd("Usage: ", 2);
+	ft_putstr_fd(prog, 2);
+	ft_putendl_fd(" <addr(number.number.number.number)> <port(number)>", 2);
 	return (-1);
 }
 
 int			main(int argc, char **argv)
 {
-	int		sock;
-	char	*buff;
+	t_env	e;
 
-	buff = NULL;
 	if (argc != 3 || !ft_isnum(argv[2]))
 		return (usage(argv[0]));
-	sock = create_client(argv[1], ft_atoi(argv[2]));
-	if (sock == -1)
+	if ((e.sock = create_client(argv[1], ft_atoi(argv[2]))) == -1)
 		return (-1);
-	while (get_next_line(0, &buff) > 0)
-	{
-		get_next_line(0, &buff);
-		if (find_cmd(sock, buff) == 0)
-			break ;
-	}
-	close(sock);
+	main_loop(&e);
+	close(e.sock);
 	return (0);
 }

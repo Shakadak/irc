@@ -6,7 +6,7 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/08 10:39:32 by npineau           #+#    #+#              #
-#    Updated: 2014/05/25 12:41:05 by npineau          ###   ########.fr        #
+#    Updated: 2014/05/25 17:55:13 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,14 @@ DIRLIB	:=	libft
 ### FILES ###
 
 SRCCLI	:=	client_main.c \
+			client_main_loop.c \
+			client_add.c \
 			client_create.c \
-			client_command.c
+			client_read.c \
+			client_write.c \
+			client_standard_input.c \
+			client_x.c
+
 SRCSRV	:=	server_check_fd.c \
 			server_clean_fd.c \
 			server_client_read.c \

@@ -6,25 +6,37 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/14 18:24:07 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 15:25:24 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 18:01:54 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CLIENT_H
 # define CLIENT_H
 
-# include <netdb.h>
+# include <sys/select.h>
 
-typedef enum	e_cmd
+# define BUF_SIZE	4096
+
+typedef struct	s_env
 {
-	ERROR,
-	SUCCESS,
-	LS,
-	CD,
-	PWD
-}				t_cmd;
+	int			sock;
+	fd_set		fd_read;
+	fd_set		fd_write;
+	char		bread[BUF_SIZE + 1];
+	char		bwrite[BUF_SIZE + 1];
+	int			fr;
+	int			fw;
+}				t_env;
 
-int		create_client(char *addr, int port);
-int		find_cmd(int port, char *buff);
+void			main_loop(t_env *e);
+void			client_read(t_env *e);
+void			client_write(t_env *e);
+void			standard_input(t_env *e);
+int				x_int(int err, int res, char *str);
+void			*x_void(void *err, void *res, char *str);
+int				create_client(char *addr, int port);
+void			client_add(t_env *e, char *msg);
+
+
 
 #endif
