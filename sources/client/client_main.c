@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/16 16:40:05 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 18:23:57 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 13:20:21 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	usage(char *prog)
 	return (-1);
 }
 
-int	main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		sock;
 	char	*buff;
