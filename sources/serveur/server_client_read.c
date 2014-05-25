@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:30:54 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 17:44:20 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 12:33:24 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,56 @@
 #include "server.h"
 #include "libft.h"
 
-void	spread(int cs, t_env *e, char *chan, char *msg)
+void		spread(int cs, t_env *e, char *msg, int first)
 {
-	int	i;
+	int		i;
+	char	*chan;
 
 	if (*e->fds[cs].channel < 0)
 	{
-		ft_strcat(e->fds[cs].buf_write, "Please, join a channel.\n");
+		if (first)
+			client_add(cs, e, "Please, join a channel.\n");
 		return ;
 	}
+	chan = e->fds[cs].channel;
 	i = 0;
 	while (i < e->maxfd)
 	{
 		if (e->fds[i].type == FD_CLIENT && ft_strequ(e->fds[i].channel, chan))
-			ft_strcat(e->fds[i].buf_write, msg);
+			client_add(i, e, msg);
 		i++;
 	}
 }
 
-void	client_read(t_env *e, int cs)
+static void	client_leave(int cs, t_env *e)
 {
-	int	r;
-
-	r = x_int(-1, recv(cs, e->fds[cs].buf_read, BUF_SIZE, 0), "recv");
-	if (r <= 0)
-	{
 		close(cs);
 		clean_fd(&e->fds[cs]);
 		printf("client #%d gone away\n", cs);
-	}
+}
+
+void		client_read(t_env *e, int cs)
+{
+	int	r;
+	int	count;
+
+	count = e->fds[cs].fr;
+	r = recv(cs, e->fds[cs].buf_read + count, BUF_SIZE - count, 0);
+	x_int(-1, r, "recv");
+	if (r <= 0)
+		client_leave(cs, e);
 	else
 	{
-		if (!command(cs, e, r))
+		e->fds[cs].fr += r;
+		if (!ft_strchr(e->fds[cs].buf_read, '\n') && e->fds[cs].fr != BUF_SIZE)
+			return ;
+		if (!command(cs, e, e->fds[cs].fr))
 		{
-			spread(cs, e, e->fds[cs].channel, e->fds[cs].nick);
-			spread(cs, e, e->fds[cs].channel, ": ");
-			spread(cs, e, e->fds[cs].channel, e->fds[cs].buf_read);
+			spread(cs, e, e->fds[cs].nick, 1);
+			spread(cs, e, ": ", 0);
+			spread(cs, e, e->fds[cs].buf_read, 0);
 		}
 		ft_strclr(e->fds[cs].buf_read);
+		e->fds[cs].fr = 0;
 	}
 }

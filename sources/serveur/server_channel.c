@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/23 11:43:21 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 17:33:41 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 12:36:36 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 void	join(int cs, t_env *e, char *chan)
 {
 	if (chan == NULL)
-		ft_strcat(e->fds[cs].buf_write, "Channel missing.\n");
+		client_add(cs, e, "Channel missing.\n");
 	else if (*chan != '#')
-		ft_strcat(e->fds[cs].buf_write, "Invalid channel. (eg: #bananez)\n");
+		client_add(cs, e, "Invalid channel. (eg: #bananez)\n");
 	else
 	{
 		ft_strncpy(e->fds[cs].channel, chan, CHAN_SIZE);
-		spread(cs, e, e->fds[cs].channel, e->fds[cs].nick);
-		spread(cs, e, e->fds[cs].channel, " joined the channel.\n");
+		spread(cs, e, e->fds[cs].nick, 1);
+		spread(cs, e, " joined the channel.\n", 0);
 	}
 }
 
@@ -36,7 +36,7 @@ void	who(int cs, t_env *e)
 	i = 0;
 	if (*chan < 0)
 	{
-		ft_strcat(e->fds[cs].buf_write, "Please, join a channel.\n");
+		client_add(cs, e, "Please, join a channel.\n");
 		return ;
 	}
 	while (i < e->maxfd)
@@ -44,9 +44,9 @@ void	who(int cs, t_env *e)
 		if (e->fds[i].type == FD_CLIENT && ft_strequ(e->fds[i].channel, chan))
 		{
 			if (i == cs)
-				ft_strcat(e->fds[cs].buf_write, "You : ");
-			ft_strcat(e->fds[cs].buf_write, e->fds[i].nick);
-			ft_strcat(e->fds[cs].buf_write, "\n");
+				client_add(cs, e, "You : ");
+			client_add(cs, e, e->fds[i].nick);
+			client_add(cs, e, "\n");
 		}
 		i++;
 	}
@@ -58,11 +58,13 @@ void	leave(int cs, t_env *e, char *chan)
 	{
 		if (!ft_strequ(e->fds[cs].channel, chan))
 		{
-			ft_strcat(e->fds[cs].buf_write, "Can't leave this channel.\n");
+			client_add(cs, e, "Can't leave this channel: ");
+			client_add(cs, e, chan);
+			client_add(cs, e, "\n");
 			return ;
 		}
 	}
-	spread(cs, e, e->fds[cs].channel, e->fds[cs].nick);
-	spread(cs, e, e->fds[cs].channel, " left the channel.\n");
+	spread(cs, e, e->fds[cs].nick, 1);
+	spread(cs, e, " left the channel.\n", 0);
 	*e->fds[cs].channel = -1;
 }

@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 17:34:15 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 12:39:54 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # define NICK_SIZE	9
 # define CHAN_SIZE	200
 
-# define USAGE		"Usage: %s port\n"
-
 typedef struct	s_fd
 {
 	int			type;
@@ -33,6 +31,8 @@ typedef struct	s_fd
 	void		(*fct_read)();
 	void		(*fct_write)();
 	char		buf_read[BUF_SIZE + 1];
+	int			fr;
+	int			fw;
 	char		buf_write[BUF_SIZE + 1];
 }				t_fd;
 
@@ -61,7 +61,8 @@ void			init_fd(t_env *e);
 void			do_select(t_env *e);
 void			check_fd(t_env *e);
 int				command(int cs, t_env *e, int r);
-void			spread(int cs, t_env *e, char *chan, char *msg);
+void			spread(int cs, t_env *e, char *msg, int first);
+void			client_add(int cs, t_env *e, char *msg);
 
 void			join(int cs, t_env *e, char *chan);
 void			leave(int cs, t_env *e, char *chan);

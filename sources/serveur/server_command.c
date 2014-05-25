@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 15:19:44 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 12:49:50 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,37 @@ static char	*clean_str(char *str)
 static void	change_nick(int cs, t_env *e, char *nick)
 {
 	if (nick == NULL)
-		ft_strcat(e->fds[cs].buf_write, "Nickname missinig.\n");
+		client_add(cs, e, "Nickname missinig.\n");
 	else if (get_dest(e, nick) != -1)
-		ft_strcat(e->fds[cs].buf_write, "Nickname unavailable.\n");
+		client_add(cs, e, "Nickname unavailable.\n");
 	else
 	{
 		ft_strncpy(e->fds[cs].nick, nick, NICK_SIZE);
-		ft_strcat(e->fds[cs].buf_write, "Nickname changed to: ");
-		ft_strcat(e->fds[cs].buf_write, e->fds[cs].nick);
-		ft_strcat(e->fds[cs].buf_write, ".\n");
+		client_add(cs, e, "Nickname changed to: ");
+		client_add(cs, e, e->fds[cs].nick);
+		client_add(cs, e, ".\n");
 	}
 }
 
 static void	help(int cs, t_env *e)
 {
-	ft_strcat(e->fds[cs].buf_write, "\n/nick <nickname(max 9 characters,\
+	client_add(cs, e, "\n/nick <nickname(max 9 characters,\
 otherwise will be truncated)>\n/join <#chan>\n/leave [#currentchan]\n\
 /msg <nick> <message>\n/who\n\n");
+}
+
+static void	unkown_command(int cs, t_env *e, char *cmd)
+{
+	client_add(cs, e, "Unknown command: ");
+	client_add(cs, e, cmd);
+	client_add(cs, e, "\n");
 }
 
 int			command(int cs, t_env *e, int r)
 {
 	char	**aarg;
 
+	ft_putendl("command in");
 	if (*(e->fds[cs].buf_read) != '/')
 		return (0);
 	e->fds[cs].buf_read[r - 1] = 0;
@@ -70,10 +78,11 @@ int			command(int cs, t_env *e, int r)
 		leave(cs, e, aarg[1]);
 	else if (ft_strequ(aarg[0], "/who"))
 		who(cs, e);
-	else if (ft_strequ(aarg[0], "/help"))
+	else if (ft_strequ(aarg[0], "/help") || ft_strequ(aarg[0], "/command"))
 		help(cs, e);
 	else
-		ft_strcat(e->fds[cs].buf_write, "Unknown command.\n");
+		unkown_command(cs, e, aarg[0]);
 	ft_array_free((void **)aarg);
+	ft_putendl("out");
 	return (1);
 }

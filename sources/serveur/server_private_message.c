@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/23 11:27:19 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/23 14:43:02 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 13:03:59 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,25 @@ void	msg(int cs, t_env *e, char **arg)
 	int	i;
 
 	if (arg[1] == NULL)
-		ft_strcat(e->fds[cs].buf_write, "Destination and message mising.\n");
+		client_add(cs, e, "Destination and message mising.\n");
 	else if (arg[2] == NULL)
-		ft_strcat(e->fds[cs].buf_write, "Message mising.\n");
+		client_add(cs, e, "Message mising.\n");
 	else
 	{
 		if ((dest = get_dest(e, arg[1])) == -1)
-			ft_strcat(e->fds[cs].buf_write, "Invalid nickname.\n");
+			client_add(cs, e, "Invalid nickname.\n");
 		else
 		{
 			i = 2;
-			ft_strcat(e->fds[dest].buf_write, "from ");
-			ft_strcat(e->fds[dest].buf_write, e->fds[cs].nick);
-			ft_strcat(e->fds[dest].buf_write, " : ");
+			client_add(dest, e, "from ");
+			client_add(dest, e, e->fds[cs].nick);
+			client_add(dest, e, " : ");
 			while (arg[i])
 			{
-				ft_strcat(e->fds[dest].buf_write, arg[i++]);
-				ft_strcat(e->fds[dest].buf_write, " ");
+				client_add(dest, e, arg[i++]);
+				client_add(dest, e, " ");
 			}
-			ft_strcat(e->fds[dest].buf_write, "\n");
+			client_add(dest, e, "\n");
 		}
 	}
 }
