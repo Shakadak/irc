@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 12:49:50 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 13:14:04 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int			command(int cs, t_env *e, int r)
 {
 	char	**aarg;
 
-	ft_putendl("command in");
 	if (*(e->fds[cs].buf_read) != '/')
 		return (0);
 	e->fds[cs].buf_read[r - 1] = 0;
@@ -83,6 +82,5 @@ int			command(int cs, t_env *e, int r)
 	else
 		unkown_command(cs, e, aarg[0]);
 	ft_array_free((void **)aarg);
-	ft_putendl("out");
 	return (1);
 }
