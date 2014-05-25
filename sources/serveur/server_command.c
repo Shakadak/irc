@@ -6,11 +6,10 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 13:14:04 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 18:17:38 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <sys/socket.h>
 #include "server.h"
@@ -38,10 +37,17 @@ static void	change_nick(int cs, t_env *e, char *nick)
 		client_add(cs, e, "Nickname unavailable.\n");
 	else
 	{
+		spread(cs, e, e->fds[cs].nick, 0);
 		ft_strncpy(e->fds[cs].nick, nick, NICK_SIZE);
-		client_add(cs, e, "Nickname changed to: ");
-		client_add(cs, e, e->fds[cs].nick);
-		client_add(cs, e, ".\n");
+		spread(cs, e, " changed his nickname to: ", 0);
+		spread(cs, e, e->fds[cs].nick, 0);
+		spread(cs, e, ".\n", 0);
+		if (*e->fds[cs].channel == -1)
+		{
+			client_add(cs, e, "Nickname changed to: ");
+			client_add(cs, e, e->fds[cs].nick);
+			client_add(cs, e, ".\n");
+		}
 	}
 }
 
@@ -75,6 +81,8 @@ int			command(int cs, t_env *e, int r)
 		join(cs, e, aarg[1]);
 	else if (ft_strequ(aarg[0], "/leave"))
 		leave(cs, e, aarg[1]);
+	else if (ft_strequ(aarg[0], "/quit"))
+		close(cs);
 	else if (ft_strequ(aarg[0], "/who"))
 		who(cs, e);
 	else if (ft_strequ(aarg[0], "/help") || ft_strequ(aarg[0], "/command"))

@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/14 18:24:07 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 18:01:54 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 18:19:05 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,5 @@ int				x_int(int err, int res, char *str);
 void			*x_void(void *err, void *res, char *str);
 int				create_client(char *addr, int port);
 void			client_add(t_env *e, char *msg);
-
-
 
 #endif
