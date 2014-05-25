@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/16 16:40:35 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/16 18:00:02 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 14:40:59 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	create_client(char *addr, int port)
 	int					sock;
 	struct protoent		*proto;
 	struct sockaddr_in	sin;
+	char				local[] = "127.0.0.1";
 
+	if (ft_strequ(addr, "localhost"))
+		addr = local;
 	proto = getprotobyname("tcp");
 	if (proto == 0)
 		return (-1);
