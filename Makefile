@@ -6,7 +6,7 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/08 10:39:32 by npineau           #+#    #+#              #
-#    Updated: 2014/05/25 18:35:38 by npineau          ###   ########.fr        #
+#    Updated: 2014/05/25 18:53:21 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRCSRV	:=	server_check_fd.c \
 			server_srv_accept.c \
 			server_srv_create.c \
 			server_command.c \
+			server_nick.c \
 			server_channel.c \
 			server_private_message.c \
 			server_client_add.c \

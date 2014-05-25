@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 18:17:38 by npineau          ###   ########.fr       */
+/*   Updated: 2014/05/25 18:51:30 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,6 @@ static char	*clean_str(char *str)
 		tmp++;
 	}
 	return (str);
-}
-
-static void	change_nick(int cs, t_env *e, char *nick)
-{
-	if (nick == NULL)
-		client_add(cs, e, "Nickname missinig.\n");
-	else if (get_dest(e, nick) != -1)
-		client_add(cs, e, "Nickname unavailable.\n");
-	else
-	{
-		spread(cs, e, e->fds[cs].nick, 0);
-		ft_strncpy(e->fds[cs].nick, nick, NICK_SIZE);
-		spread(cs, e, " changed his nickname to: ", 0);
-		spread(cs, e, e->fds[cs].nick, 0);
-		spread(cs, e, ".\n", 0);
-		if (*e->fds[cs].channel == -1)
-		{
-			client_add(cs, e, "Nickname changed to: ");
-			client_add(cs, e, e->fds[cs].nick);
-			client_add(cs, e, ".\n");
-		}
-	}
 }
 
 static void	help(int cs, t_env *e)
