@@ -6,11 +6,10 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 18:51:30 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/03 15:53:36 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <sys/socket.h>
 #include "server.h"
 #include "libft.h"
@@ -60,7 +59,7 @@ int			command(int cs, t_env *e, int r)
 	else if (ft_strequ(aarg[0], "/leave"))
 		leave(cs, e, aarg[1]);
 	else if (ft_strequ(aarg[0], "/quit"))
-		close(cs);
+		client_leave(cs, e);
 	else if (ft_strequ(aarg[0], "/who"))
 		who(cs, e);
 	else if (ft_strequ(aarg[0], "/help") || ft_strequ(aarg[0], "/command"))

@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 18:52:20 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/03 15:53:46 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void			client_add(int cs, t_env *e, char *msg);
 
 void			join(int cs, t_env *e, char *chan);
 void			leave(int cs, t_env *e, char *chan);
+void			client_leave(int cs, t_env *e);
 void			who(int cs, t_env *e);
 int				get_dest(t_env *e, char *target);
 void			msg(int cs, t_env *e, char **arg);
