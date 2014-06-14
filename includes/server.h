@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/06/14 15:39:24 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/14 15:53:55 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			leave(int cs, t_env *e, char **aarg);
 void			client_leave(int cs, t_env *e, char **aarg);
 void			who(int cs, t_env *e, char **aarg);
 int				get_dest(t_env *e, char *target);
-void			msg(int cs, t_env *e, char **arg, char **aarg);
+void			msg(int cs, t_env *e, char **arg);
 void			change_nick(int cs, t_env *e, char **aarg);
 
 #endif

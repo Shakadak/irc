@@ -6,10 +6,11 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/06/14 13:54:53 by npineau           #+#    #+#             */
-/*   Updated: 2014/06/14 15:18:07 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/14 15:54:24 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "server.h"
 
 t_cmd	*fill_commands(t_cmd *tab)

@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/23 11:43:21 by npineau           #+#    #+#             */
-/*   Updated: 2014/06/14 15:33:11 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/14 15:53:08 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,12 @@ void	join(int cs, t_env *e, char **aarg)
 	}
 }
 
-void	who(int cs, t_env *e)
+void	who(int cs, t_env *e, char **aarg)
 {
 	int		i;
 	char	*chan;
 
+	(void)aarg;
 	chan = e->fds[cs].channel;
 	i = 0;
 	if (*chan < 0)

@@ -6,7 +6,7 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/08 10:39:32 by npineau           #+#    #+#              #
-#    Updated: 2014/06/10 17:45:14 by npineau          ###   ########.fr        #
+#    Updated: 2014/06/14 15:50:58 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,33 +25,9 @@ DIRLIB	:=	libft
 
 ### FILES ###
 
-SRCCLI	:=	client_main.c \
-			client_main_loop.c \
-			client_add.c \
-			client_create.c \
-			client_read.c \
-			client_write.c \
-			client_standard_input.c \
-			client_x.c
+include $(DIRCLI)/$(CLIENT).mk
 
-SRCSRV	:=	server_check_fd.c \
-			server_clean_fd.c \
-			server_client_read.c \
-			server_client_write.c \
-			server_do_select.c \
-			server_get_opt.c \
-			server_init_env.c \
-			server_init_fd.c \
-			server_main.c \
-			server_main_loop.c \
-			server_srv_accept.c \
-			server_srv_create.c \
-			server_command.c \
-			server_nick.c \
-			server_channel.c \
-			server_private_message.c \
-			server_client_add.c \
-			server_x.c
+include $(DIRSRV)/$(SERVEUR).mk
 
 OBJSRV	:=	$(SRCSRV:.c=.o)
 OBJCLI	:=	$(SRCCLI:.c=.o)
