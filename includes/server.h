@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/06/03 15:53:46 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/14 15:39:24 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # define BUF_SIZE	4096
 # define NICK_SIZE	9
 # define CHAN_SIZE	200
+
+typedef struct	s_cmd
+{
+	char		*cmd;
+	void		(*fct)();
+}				t_cmd;
 
 typedef struct	s_fd
 {
@@ -64,12 +70,17 @@ int				command(int cs, t_env *e, int r);
 void			spread(int cs, t_env *e, char *msg, int first);
 void			client_add(int cs, t_env *e, char *msg);
 
-void			join(int cs, t_env *e, char *chan);
-void			leave(int cs, t_env *e, char *chan);
-void			client_leave(int cs, t_env *e);
-void			who(int cs, t_env *e);
+
+t_cmd			*fill_commands(t_cmd *tab);
+void			*get_command(t_cmd *tab, char *cmd);
+
+void			help(int cs, t_env *e, char **aarg);
+void			join(int cs, t_env *e, char **aarg);
+void			leave(int cs, t_env *e, char **aarg);
+void			client_leave(int cs, t_env *e, char **aarg);
+void			who(int cs, t_env *e, char **aarg);
 int				get_dest(t_env *e, char *target);
-void			msg(int cs, t_env *e, char **arg);
-void			change_nick(int cs, t_env *e, char *nick);
+void			msg(int cs, t_env *e, char **arg, char **aarg);
+void			change_nick(int cs, t_env *e, char **aarg);
 
 #endif

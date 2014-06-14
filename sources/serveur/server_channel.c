@@ -6,22 +6,22 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/23 11:43:21 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 12:36:36 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/14 15:33:11 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "server.h"
 
-void	join(int cs, t_env *e, char *chan)
+void	join(int cs, t_env *e, char **aarg)
 {
-	if (chan == NULL)
+	if (aarg[1] == NULL)
 		client_add(cs, e, "Channel missing.\n");
-	else if (*chan != '#')
+	else if (*aarg[1] != '#')
 		client_add(cs, e, "Invalid channel. (eg: #bananez)\n");
 	else
 	{
-		ft_strncpy(e->fds[cs].channel, chan, CHAN_SIZE);
+		ft_strncpy(e->fds[cs].channel, aarg[1], CHAN_SIZE);
 		spread(cs, e, e->fds[cs].nick, 1);
 		spread(cs, e, " joined the channel.\n", 0);
 	}
@@ -52,14 +52,14 @@ void	who(int cs, t_env *e)
 	}
 }
 
-void	leave(int cs, t_env *e, char *chan)
+void	leave(int cs, t_env *e, char **aarg)
 {
-	if (chan)
+	if (aarg[1])
 	{
-		if (!ft_strequ(e->fds[cs].channel, chan))
+		if (!ft_strequ(e->fds[cs].channel, aarg[1]))
 		{
 			client_add(cs, e, "Can't leave this channel: ");
-			client_add(cs, e, chan);
+			client_add(cs, e, aarg[1]);
 			client_add(cs, e, "\n");
 			return ;
 		}

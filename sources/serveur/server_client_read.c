@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:30:54 by npineau           #+#    #+#             */
-/*   Updated: 2014/06/03 15:53:26 by npineau          ###   ########.fr       */
+/*   Updated: 2014/06/14 15:40:59 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ void		spread(int cs, t_env *e, char *msg, int first)
 	}
 }
 
-void		client_leave(int cs, t_env *e)
+void		client_leave(int cs, t_env *e, char **aarg)
 {
+	(void)aarg;
 	close(cs);
 	clean_fd(&e->fds[cs]);
 	printf("client #%d gone away\n", cs);
@@ -53,7 +54,7 @@ void		client_read(t_env *e, int cs)
 	r = recv(cs, e->fds[cs].buf_read + count, BUF_SIZE - count, 0);
 	x_int(-1, r, "recv");
 	if (r <= 0)
-		client_leave(cs, e);
+		client_leave(cs, e, NULL);
 	else
 	{
 		e->fds[cs].fr += r;
