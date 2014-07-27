@@ -33,7 +33,7 @@ void	msg(int cs, t_env *e, char **arg)
 	int	i;
 
 	if (arg[1] == NULL)
-		client_add(cs, e, "Destination and message mising.\n");
+		client_add(cs, e, "Destination and message missing.\n");
 	else if (arg[2] == NULL)
 		client_add(cs, e, "Message mising.\n");
 	else
