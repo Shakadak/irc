@@ -6,7 +6,7 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/08 10:39:32 by npineau           #+#    #+#              #
-#    Updated: 2014/06/14 15:50:58 by npineau          ###   ########.fr        #
+#    Updated: 2015/03/23 17:21:51 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ SERVEUR	:=	serveur
 
 ### DIRECTORIES ###
 
-DIRSRC	:=	sources
+DIRSRC	:=	src
 DIRSRV	:=	$(DIRSRC)/$(SERVEUR)
 DIRCLI	:=	$(DIRSRC)/$(CLIENT)
-DIROBJ	:=	objects
-DIRINC	:=	includes
+DIROBJ	:=	obj
+DIRINC	:=	inc
 DIRLIB	:=	libft
 
 ### FILES ###
@@ -46,7 +46,7 @@ PLIB		:=	$(DIRLIB)/$(LIB)
 
 ### COMPILATION VARIABLES ###
 
-CC		:=	llvm-gcc
+CC		:=	clang
 C_FLAG	:=	-Wall -Wextra -Werror
 O_FLAG	:=	-O3
 L_FLAG	:=	-L $(DIRLIB) -lft

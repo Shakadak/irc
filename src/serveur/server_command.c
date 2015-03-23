@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2014/06/14 15:42:49 by npineau          ###   ########.fr       */
+/*   Updated: 2015/03/23 17:23:09 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ int			command(int cs, t_env *e, int r)
 		cmd(cs, e, aarg);
 	else
 		unkown_command(cs, e, aarg[0]);
-	ft_array_free((void **)aarg);
+	ft_freesplit((void **)aarg);
 	return (1);
 }
