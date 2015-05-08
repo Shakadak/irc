@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:44:40 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/21 17:21:42 by npineau          ###   ########.fr       */
+/*   Updated: 2015/05/08 16:24:47 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ void	init_fd(t_env *e)
 		{
 			FD_SET(i, &e->fd_read);
 			if (strlen(e->fds[i].buf_write) > 0)
+			{
 				FD_SET(i, &e->fd_write);
-			e->max = (e->max < i ? i : e->max);
+			}
+			if (e->max < i)
+			{
+				e->max = i;
+			}
 		}
-		i++;
+		++i;
 	}
 }

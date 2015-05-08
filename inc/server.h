@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2014/06/14 15:53:55 by npineau          ###   ########.fr       */
+/*   Updated: 2015/05/08 16:27:29 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void			check_fd(t_env *e);
 int				command(int cs, t_env *e, int r);
 void			spread(int cs, t_env *e, char *msg, int first);
 void			client_add(int cs, t_env *e, char *msg);
-
 
 t_cmd			*fill_commands(t_cmd *tab);
 void			*get_command(t_cmd *tab, char *cmd);
