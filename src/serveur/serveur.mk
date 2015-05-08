@@ -6,7 +6,7 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/06/14 15:51:35 by npineau           #+#    #+#              #
-#    Updated: 2014/06/14 15:51:37 by npineau          ###   ########.fr        #
+#    Updated: 2015/05/08 16:17:26 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,3 +31,7 @@ SRCSRV	:=	server_check_fd.c \
 			server_get_command.c \
 			server_x.c
 
+OBJSRV	:=	$(SRCSRV:.c=.o)
+
+$(DIROBJ)/%.o: $(DIRSRV)/%.c $(PHEADSRV)
+	$(COMPIL)

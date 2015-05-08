@@ -6,11 +6,11 @@
 #    By: npineau <npineau@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/03/08 10:39:32 by npineau           #+#    #+#              #
-#    Updated: 2015/03/23 17:21:51 by npineau          ###   ########.fr        #
+#    Updated: 2015/05/08 16:18:57 by npineau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	:=	fckoff
+NAME	:=	irc
 CLIENT	:=	client
 SERVEUR	:=	serveur
 
@@ -26,11 +26,7 @@ DIRLIB	:=	libft
 ### FILES ###
 
 include $(DIRCLI)/$(CLIENT).mk
-
 include $(DIRSRV)/$(SERVEUR).mk
-
-OBJSRV	:=	$(SRCSRV:.c=.o)
-OBJCLI	:=	$(SRCCLI:.c=.o)
 
 HEADCLI	:=	client.h
 HEADSRV	:=	server.h
@@ -46,7 +42,6 @@ PLIB		:=	$(DIRLIB)/$(LIB)
 
 ### COMPILATION VARIABLES ###
 
-CC		:=	clang
 C_FLAG	:=	-Wall -Wextra -Werror
 O_FLAG	:=	-O3
 L_FLAG	:=	-L $(DIRLIB) -lft
@@ -75,16 +70,7 @@ $(POBJSRV): |$(DIROBJ)
 
 $(POBJCLI): |$(DIROBJ)
 
-$(DIROBJ)/%.o: $(DIRCLI)/%.c $(PHEADCLI)
-	$(COMPIL)
-
-$(DIROBJ)/%.o: $(DIRSRV)/%.c $(PHEADSRV)
-	$(COMPIL)
-
 ### EXECUTABLE ###
-
-$(NAME):
-	echo $(NAME)
 
 $(CLIENT): $(POBJCLI)
 	$(LINK)
@@ -101,3 +87,5 @@ fclean: clean
 	rm -f $(CLIENT) $(SERVEUR)
 
 re: fclean all
+
+$(NAME): all
