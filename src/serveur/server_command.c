@@ -6,13 +6,12 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/21 17:16:31 by npineau           #+#    #+#             */
-/*   Updated: 2015/03/23 17:23:09 by npineau          ###   ########.fr       */
+/*   Updated: 2015/05/09 16:35:13 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/socket.h>
 #include "server.h"
-#include "libft.h"
 
 static char	*clean_str(char *str)
 {

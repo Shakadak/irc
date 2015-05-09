@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/22 15:19:39 by npineau           #+#    #+#             */
-/*   Updated: 2015/05/08 16:27:29 by npineau          ###   ########.fr       */
+/*   Updated: 2015/05/09 16:32:28 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SERVER_H
 
 # include <sys/select.h>
+# include "libft.h"
 
 # define FD_FREE	0
 # define FD_SERV	1

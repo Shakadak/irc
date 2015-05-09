@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/23 11:27:19 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 13:03:59 by npineau          ###   ########.fr       */
+/*   Updated: 2015/05/09 16:29:15 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	msg(int cs, t_env *e, char **arg)
 			i = 2;
 			client_add(dest, e, "from ");
 			client_add(dest, e, e->fds[cs].nick);
-			client_add(dest, e, " : ");
+			client_add(dest, e, ": ");
 			while (arg[i])
 			{
 				client_add(dest, e, arg[i++]);

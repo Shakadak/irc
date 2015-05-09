@@ -6,14 +6,13 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:17:59 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/22 16:23:36 by npineau          ###   ########.fr       */
+/*   Updated: 2015/05/09 16:35:23 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <netdb.h>
 #include <netinet/in.h>
-#include "libft.h"
 #include "server.h"
 
 static void		print_server(int sock)

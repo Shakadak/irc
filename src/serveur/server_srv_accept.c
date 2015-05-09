@@ -6,7 +6,7 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/20 17:45:09 by npineau           #+#    #+#             */
-/*   Updated: 2014/05/25 12:52:58 by npineau          ###   ########.fr       */
+/*   Updated: 2015/05/09 16:35:18 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "server.h"
-#include "libft.h"
 
 void			srv_accept(t_env *e, int s)
 {
