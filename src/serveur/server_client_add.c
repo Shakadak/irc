@@ -6,22 +6,18 @@
 /*   By: npineau <npineau@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/05/25 12:18:31 by npineau           #+#    #+#             */
-/*   Updated: 2015/05/09 16:35:00 by npineau          ###   ########.fr       */
+/*   Updated: 2016/06/17 15:05:46 by npineau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "inc/server.h"
+
+static void	dummy_del(void *p)
+{
+	(void)p;
+}
 
 void	client_add(int cs, t_env *e, char *msg)
 {
-	int	fill;
-	int	len;
-
-	fill = e->fds[cs].fw;
-	len = ft_strlen(msg);
-	if (len + fill < BUF_SIZE)
-	{
-		e->fds[cs].fw += len;
-		ft_strcpy(e->fds[cs].buf_write + fill, msg);
-	}
+	rb_force_enqueue(&e->fds[cs].rb, dummy_del, msg);
 }

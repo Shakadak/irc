@@ -12,7 +12,7 @@
 
 #include <stdlib.h>
 #include <sys/resource.h>
-#include "server.h"
+#include "inc/server.h"
 
 void		init_env(t_env *e)
 {

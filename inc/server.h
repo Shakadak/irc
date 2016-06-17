@@ -14,15 +14,16 @@
 # define SERVER_H
 
 # include <sys/select.h>
-# include "libft.h"
+# include "libft/inc/libft.h"
 
 # define FD_FREE	0
 # define FD_SERV	1
 # define FD_CLIENT	2
 
-# define BUF_SIZE	4096
+# define BUF_SIZE	4095
 # define NICK_SIZE	9
 # define CHAN_SIZE	200
+# define MSG_SIZE	4000
 
 typedef struct	s_cmd
 {
@@ -38,9 +39,10 @@ typedef struct	s_fd
 	void		(*fct_read)();
 	void		(*fct_write)();
 	char		buf_read[BUF_SIZE + 1];
+	t_rb		q;
+	char		buf_write[BUF_SIZE + 1];
 	int			fr;
 	int			fw;
-	char		buf_write[BUF_SIZE + 1];
 }				t_fd;
 
 typedef struct	s_env

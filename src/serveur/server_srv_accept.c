@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#include "server.h"
+#include "inc/server.h"
 
 void			srv_accept(t_env *e, int s)
 {
@@ -40,4 +40,5 @@ void			srv_accept(t_env *e, int s)
 	client_add(cs, e, "\nFor some help, use /help or /command\n");
 	e->fds[cs].fct_read = client_read;
 	e->fds[cs].fct_write = client_write;
+	rb_new(e->maxfd, BUF_SIZE + 1, &e->fds[cs].q);
 }
