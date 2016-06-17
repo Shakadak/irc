@@ -74,7 +74,7 @@ void			client_add(int cs, t_env *e, char *msg);
 t_cmd			*fill_commands(t_cmd *tab);
 void			*get_command(t_cmd *tab, char *cmd);
 
-void			help(int cs, t_env *e, char **aarg);
+void			help(int cs, t_env *e);
 void			join(int cs, t_env *e, char **aarg);
 void			leave(int cs, t_env *e, char **aarg);
 void			client_leave(int cs, t_env *e, char **aarg);

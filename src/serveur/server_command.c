@@ -27,12 +27,11 @@ static char	*clean_str(char *str)
 	return (str);
 }
 
-void		help(int cs, t_env *e, char **aarg)
+void		help(int cs, t_env *e)
 {
-	(void)aarg;
-	client_add(cs, e, "\n/nick <nickname(max 9 characters,\
-otherwise will be truncated)>\n/join <#chan>\n/leave [#currentchan]\n\
-/msg <nick> <message>\n/who\n\n");
+	client_add(cs, e, "Available commands:\n/nick <nickname(max 9 characters,"
+		"otherwise will be truncated)>\n/join <#chan>\n/leave [#currentchan]\n"
+		"/msg <nick> <message>\n/who\n\n");
 }
 
 static void	unkown_command(int cs, t_env *e, char *cmd)

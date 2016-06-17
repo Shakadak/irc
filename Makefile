@@ -25,8 +25,8 @@ DIRLIB	:=	libft
 
 ### FILES ###
 
-include $(DIRCLI)/$(CLIENT).mk
-include $(DIRSRV)/$(SERVEUR).mk
+include $(DIRCLI)/sources.mk
+include $(DIRSRV)/sources.mk
 
 HEADCLI	:=	client.h
 HEADSRV	:=	server.h

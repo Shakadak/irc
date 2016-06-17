@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"server.h"
+#include "server.h"
 
 void	*get_command(t_cmd *tab, char *cmd)
 {
