@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "server.h"
+#include "inc/server.h"
 
 void	clean_fd(t_fd *fd)
 {

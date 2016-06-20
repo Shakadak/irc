@@ -11,18 +11,17 @@
 /* ************************************************************************** */
 
 #include <sys/socket.h>
-#include "server.h"
-#include "libft.h"
+#include "inc/server.h"
+#include "libft/inc/libft.h"
 
 void	client_write(t_env *e, int cs)
 {
-	int	len;
+	ssize_t	ret;
 
-	len = e->fds[cs].fw;
-	if (len)
+	queue_to_buffer(BUF_SIZE, e->fds[cs].buf_write, &e->fds[cs].q);
+	ret = send(cs, e->fds[cs].buf_write, ft_strlen(e->fds[cs].buf_write), 0);
+	if (ret != -1)
 	{
-		send(cs, e->fds[cs].buf_write, len, 0);
-		e->fds[cs].fw = 0;
-		ft_bzero(e->fds[cs].buf_write, BUF_SIZE);
+		ft_strcpy(e->fds[cs].buf_write, e->fds[cs].buf_write + ret);
 	}
 }

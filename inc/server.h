@@ -72,6 +72,7 @@ void			check_fd(t_env *e);
 int				command(int cs, t_env *e, int r);
 void			spread(int cs, t_env *e, char *msg, int first);
 void			client_add(int cs, t_env *e, char *msg);
+int				queue_to_buffer(size_t limit, char *buffer, t_rb *rb);
 
 t_cmd			*fill_commands(t_cmd *tab);
 void			*get_command(t_cmd *tab, char *cmd);

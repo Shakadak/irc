@@ -45,7 +45,7 @@ PLIB		:=	$(DIRLIB)/$(LIB)
 C_FLAG	:=	-Wall -Wextra -Werror
 O_FLAG	:=	-O3
 L_FLAG	:=	-L $(DIRLIB) -lft
-C_INC	:=	-I $(DIRINC) -I $(DIRLIB)/$(DIRINC)
+C_INC	:=	-I $(DIRINC) -I $(DIRLIB)/$(DIRINC) -I .
 
 COMPIL	=	$(CC) -o $@ -c $< $(C_INC) $(C_FLAG) $(O_FLAG)
 LINK	=	$(CC) -o $@ $^ $(L_FLAG)

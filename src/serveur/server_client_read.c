@@ -13,8 +13,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/socket.h>
-#include "server.h"
-#include "libft.h"
+#include "inc/server.h"
+#include "libft/inc/libft.h"
 
 void		spread(int cs, t_env *e, char *msg, int first)
 {
@@ -41,6 +41,7 @@ void		client_leave(int cs, t_env *e, char **aarg)
 {
 	(void)aarg;
 	close(cs);
+	rb_free(&e->fds[cs].q);
 	clean_fd(&e->fds[cs]);
 	printf("client #%d gone away\n", cs);
 }
@@ -51,14 +52,14 @@ void		client_read(t_env *e, int cs)
 	int	count;
 
 	count = e->fds[cs].fr;
-	r = recv(cs, e->fds[cs].buf_read + count, BUF_SIZE - count, 0);
+	r = recv(cs, e->fds[cs].buf_read + count, MSG_SIZE - count, 0);
 	x_int(-1, r, "recv");
 	if (r <= 0)
 		client_leave(cs, e, NULL);
 	else
 	{
 		e->fds[cs].fr += r;
-		if (!ft_strchr(e->fds[cs].buf_read, '\n') && e->fds[cs].fr != BUF_SIZE)
+		if (!ft_strchr(e->fds[cs].buf_read, '\n') && e->fds[cs].fr != MSG_SIZE)
 			return ;
 		if (!command(cs, e, e->fds[cs].fr))
 		{

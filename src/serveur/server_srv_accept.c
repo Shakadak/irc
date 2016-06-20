@@ -35,10 +35,10 @@ void			srv_accept(t_env *e, int s)
 	ft_strcpy(e->fds[cs].nick, "guest");
 	ft_strcat(e->fds[cs].nick, tmp);
 	ft_strdel(&tmp);
+	rb_new(e->maxfd, BUF_SIZE + 1, &e->fds[cs].q);
 	client_add(cs, e, "Logged as: ");
 	client_add(cs, e, e->fds[cs].nick);
 	client_add(cs, e, "\nFor some help, use /help or /command\n");
 	e->fds[cs].fct_read = client_read;
 	e->fds[cs].fct_write = client_write;
-	rb_new(e->maxfd, BUF_SIZE + 1, &e->fds[cs].q);
 }

@@ -13,8 +13,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/socket.h>
-#include "client.h"
-#include "libft.h"
+#include "inc/client.h"
+#include "libft/inc/libft.h"
 
 static void	client_leave(int cs, int r)
 {

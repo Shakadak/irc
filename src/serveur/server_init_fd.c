@@ -12,7 +12,7 @@
 
 #include <string.h>
 #include <sys/select.h>
-#include "server.h"
+#include "inc/server.h"
 
 void	init_fd(t_env *e)
 {
@@ -27,7 +27,7 @@ void	init_fd(t_env *e)
 		if (e->fds[i].type != FD_FREE)
 		{
 			FD_SET(i, &e->fd_read);
-			if (ft_strlen(e->fds[i].buf_write) > 0)
+			if (ft_strlen(e->fds[i].buf_write) > 0 || !rb_empty(e->fds[i].q))
 			{
 				FD_SET(i, &e->fd_write);
 			}

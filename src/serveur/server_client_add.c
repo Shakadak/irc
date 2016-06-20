@@ -19,5 +19,5 @@ static void	dummy_del(void *p)
 
 void	client_add(int cs, t_env *e, char *msg)
 {
-	rb_force_enqueue(&e->fds[cs].rb, dummy_del, msg);
+	rb_force_enqueue(&e->fds[cs].q, dummy_del, msg);
 }

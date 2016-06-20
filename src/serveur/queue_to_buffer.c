@@ -23,14 +23,16 @@ int		queue_to_buffer(size_t limit, char *buffer, t_rb *rb)
 	size_t	peekedsize;
 	size_t	buffersize;
 
-	rb_peek(*rb, (void**)&peekaboo);
-	peekedsize = ft_strlen(peekaboo);
-	buffersize = ft_strlen(buffer);
-	if (peekedsize + buffersize < limit)
+	if (rb_peek(*rb, (void**)&peekaboo))
 	{
-		strcpy(peekaboo, buffer + buffersize);
-		rb_drop_n(rb, dummy_del, 1);
-		queue_to_buffer(limit, buffer, rb);
+		peekedsize = ft_strlen(peekaboo);
+		buffersize = ft_strlen(buffer);
+		if (peekedsize + buffersize < limit)
+		{
+			strcpy(buffer + buffersize, peekaboo);
+			rb_drop_n(rb, dummy_del, 1);
+			queue_to_buffer(limit, buffer, rb);
+		}
 	}
 	return (1);
 }

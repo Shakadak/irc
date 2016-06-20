@@ -29,7 +29,8 @@ SRCSRV	:=	server_check_fd.c \
 			server_client_add.c \
 			server_fill_commands.c \
 			server_get_command.c \
-			server_x.c
+			server_x.c \
+			queue_to_buffer.c
 
 OBJSRV	:=	$(SRCSRV:.c=.o)
 
