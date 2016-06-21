@@ -48,8 +48,9 @@ void		client_leave(int cs, t_env *e, char **aarg)
 
 void		client_read(t_env *e, int cs)
 {
-	int	r;
-	int	count;
+	int		r;
+	int		count;
+	char	nuff[BUF_SIZE + 1];
 
 	count = e->fds[cs].fr;
 	r = recv(cs, e->fds[cs].buf_read + count, MSG_SIZE - count, 0);
@@ -63,9 +64,10 @@ void		client_read(t_env *e, int cs)
 			return ;
 		if (!command(cs, e, e->fds[cs].fr))
 		{
-			spread(cs, e, e->fds[cs].nick, 1);
-			spread(cs, e, ": ", 0);
-			spread(cs, e, e->fds[cs].buf_read, 0);
+			ft_bzero(nuff, BUF_SIZE + 1);
+			spread(cs, e, ft_strcat(ft_strcat(ft_strcat(nuff,
+								e->fds[cs].nick), ": "), e->fds[cs].buf_read),
+					1);
 		}
 		ft_strclr(e->fds[cs].buf_read);
 		e->fds[cs].fr = 0;
