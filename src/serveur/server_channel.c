@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "server.h"
+#include "inc/server.h"
 
 void	join(int cs, t_env *e, char **aarg)
 {
+	char	nuff[NICK_SIZE + 21];
 	if (aarg[1] == NULL)
 		client_add(cs, e, "Channel missing.\n");
 	else if (*aarg[1] != '#')
@@ -22,8 +22,8 @@ void	join(int cs, t_env *e, char **aarg)
 	else
 	{
 		ft_strncpy(e->fds[cs].channel, aarg[1], CHAN_SIZE);
-		spread(cs, e, e->fds[cs].nick, 1);
-		spread(cs, e, " joined the channel.\n", 0);
+		ft_strcat(ft_strcat(nuff, e->fds[cs].nick), " joined the channel.\n");
+		spread(cs, e, nuff, 0);
 	}
 }
 
@@ -55,6 +55,7 @@ void	who(int cs, t_env *e, char **aarg)
 
 void	leave(int cs, t_env *e, char **aarg)
 {
+	char	nuff[NICK_SIZE + 19];
 	if (aarg[1])
 	{
 		if (!ft_strequ(e->fds[cs].channel, aarg[1]))
@@ -65,7 +66,7 @@ void	leave(int cs, t_env *e, char **aarg)
 			return ;
 		}
 	}
-	spread(cs, e, e->fds[cs].nick, 1);
-	spread(cs, e, " left the channel.\n", 0);
+	ft_strcat(ft_strcat(nuff, e->fds[cs].nick), " left the channel.\n");
+	spread(cs, e, nuff, 0);
 	*e->fds[cs].channel = -1;
 }
