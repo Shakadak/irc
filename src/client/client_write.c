@@ -12,15 +12,16 @@
 
 #include <sys/socket.h>
 #include <unistd.h>
-#include "client.h"
-#include "libft.h"
+#include "inc/client.h"
+#include "libft/inc/libft.h"
 
 void	client_write(t_env *e)
 {
-	if (e->fw)
+	ssize_t	ret;
+
+	ret = send(e->sock, e->bwrite, ft_strlen(e->bwrite), 0);
+	if (ret != -1)
 	{
-		send(e->sock, e->bwrite, e->fw, 0);
-		e->fw = 0;
-		ft_bzero(e->bwrite, BUF_SIZE);
+		ft_strcpy(e->bwrite, e->bwrite + ret);
 	}
 }

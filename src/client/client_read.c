@@ -16,14 +16,14 @@
 #include "inc/client.h"
 #include "libft/inc/libft.h"
 
-static void	client_leave(int cs, int r)
+void	client_leave(int cs, int r)
 {
 	close(cs);
 	ft_putendl("\tConnection closed.");
 	exit(r);
 }
 
-void		client_read(t_env *e)
+void	client_read(t_env *e)
 {
 	int	r;
 

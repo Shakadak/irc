@@ -36,5 +36,6 @@ int				x_int(int err, int res, char *str);
 void			*x_void(void *err, void *res, char *str);
 int				create_client(char *addr, int port);
 void			client_add(t_env *e, char *msg);
+void			client_leave(int cs, int r);
 
 #endif
