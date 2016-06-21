@@ -42,6 +42,8 @@ PLIB		:=	$(DIRLIB)/$(LIB)
 
 ### COMPILATION VARIABLES ###
 
+
+CC		:=	clang
 C_FLAG	:=	-Wall -Wextra -Werror
 O_FLAG	:=	-O3
 L_FLAG	:=	-L $(DIRLIB) -lft
