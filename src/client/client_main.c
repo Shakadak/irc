@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "libft.h"
-#include "client.h"
+#include "libft/inc/libft.h"
+#include "inc/client.h"
 
 static int	ft_isnum(char *str)
 {
@@ -37,6 +37,7 @@ int			main(int argc, char **argv)
 {
 	t_env	e;
 
+	ft_bzero(&e, sizeof(t_env));
 	if (argc != 3 || !ft_isnum(argv[2]))
 		return (usage(argv[0]));
 	if ((e.sock = create_client(argv[1], ft_atoi(argv[2]))) == -1)

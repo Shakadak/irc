@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "server.h"
+#include "inc/server.h"
 
 int		get_dest(t_env *e, char *target)
 {
@@ -21,7 +20,9 @@ int		get_dest(t_env *e, char *target)
 	while (i < e->maxfd)
 	{
 		if (ft_strequ(e->fds[i].nick, target))
+		{
 			return (i);
+		}
 		i++;
 	}
 	return (-1);
@@ -29,8 +30,9 @@ int		get_dest(t_env *e, char *target)
 
 void	msg(int cs, t_env *e, char **arg)
 {
-	int	dest;
-	int	i;
+	int		dest;
+	int		i;
+	char	nuff[BUF_SIZE + 1];
 
 	if (arg[1] == NULL)
 		client_add(cs, e, "Destination and message missing.\n");
@@ -43,15 +45,13 @@ void	msg(int cs, t_env *e, char **arg)
 		else
 		{
 			i = 2;
-			client_add(dest, e, "from ");
-			client_add(dest, e, e->fds[cs].nick);
-			client_add(dest, e, ": ");
+			ft_strcat(ft_strcat(nuff, "from "), e->fds[cs].nick);
+			ft_strcat(nuff, ":");
 			while (arg[i])
 			{
-				client_add(dest, e, arg[i++]);
-				client_add(dest, e, " ");
+				ft_strcat(ft_strcat(nuff, " "), arg[i++]);
 			}
-			client_add(dest, e, "\n");
+			client_add(dest, e, ft_strcat(nuff, "\n"));
 		}
 	}
 }
