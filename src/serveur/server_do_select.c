@@ -24,7 +24,4 @@ void	do_select(t_env *e)
 	e->r = select(e->max + 1, &e->fd_read, &e->fd_write, NULL, NULL);
 	if (e->r == 0)
 		ft_putstr("timout ");
-	ft_putstr("Clients connected: ");
-	ft_putnbr(e->r);
-	ft_putchar('\n');
 }
