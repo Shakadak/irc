@@ -15,6 +15,7 @@
 void	join(int cs, t_env *e, char **aarg)
 {
 	char	nuff[NICK_SIZE + 21];
+
 	if (aarg[1] == NULL)
 		client_add(cs, e, "Channel missing.\n");
 	else if (*aarg[1] != '#')
@@ -56,6 +57,7 @@ void	who(int cs, t_env *e, char **aarg)
 void	leave(int cs, t_env *e, char **aarg)
 {
 	char	nuff[NICK_SIZE + 19];
+
 	if (aarg[1])
 	{
 		if (!ft_strequ(e->fds[cs].channel, aarg[1]))
