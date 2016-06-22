@@ -38,10 +38,12 @@ int			main(int argc, char **argv)
 	t_env	e;
 
 	ft_bzero(&e, sizeof(t_env));
-	if (argc != 3 || !ft_isnum(argv[2]))
+	e.sock = -1;
+	if ((argc == 3 && !ft_isnum(argv[2])) || argc > 3)
 		return (usage(argv[0]));
-	if ((e.sock = create_client(argv[1], ft_atoi(argv[2]))) == -1)
-		return (-1);
+	else if (argc == 3)
+		if ((e.sock = create_client(argv[1], ft_atoi(argv[2]))) == -1)
+			return (-1);
 	main_loop(&e);
 	close(e.sock);
 	return (0);

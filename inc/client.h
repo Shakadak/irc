@@ -31,6 +31,7 @@ typedef struct	s_env
 void			main_loop(t_env *e);
 void			client_read(t_env *e);
 void			client_write(t_env *e);
+int				client_connect(int sock, char *command);
 void			standard_input(t_env *e);
 int				x_int(int err, int res, char *str);
 void			*x_void(void *err, void *res, char *str);

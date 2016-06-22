@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "client.h"
+#include "inc/client.h"
 
 void	standard_input(t_env *e)
 {
@@ -21,6 +21,12 @@ void	standard_input(t_env *e)
 	if ((r = x_int(-1, read(STDIN_FILENO, buff, BUF_SIZE), "read")))
 	{
 		buff[r] = 0;
-		client_add(e, buff);
+		if (strnequ(buff, "/connect ", 9))
+			e->sock = client_connect(e->sock, buff);
+		else if (e->sock == -1)
+			write(STDIN_FILENO, "Please connect to a server"
+					" before attempting anything else.\n", 60);
+		else
+			client_add(e, buff);
 	}
 }
