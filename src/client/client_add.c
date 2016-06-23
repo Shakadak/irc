@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "client.h"
+#include "libft/inc/libft.h"
+#include "inc/client.h"
 
 void	client_add(t_env *e, char *msg)
 {

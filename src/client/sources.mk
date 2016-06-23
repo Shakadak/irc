@@ -13,6 +13,7 @@
 SRCCLI	:=	client_main.c \
 			client_main_loop.c \
 			client_add.c \
+			client_connect.c \
 			client_create.c \
 			client_read.c \
 			client_write.c \

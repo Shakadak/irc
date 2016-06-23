@@ -23,5 +23,6 @@ void	client_write(t_env *e)
 	if (ret != -1)
 	{
 		ft_strcpy(e->bwrite, e->bwrite + ret);
+		e->fw -= ret;
 	}
 }

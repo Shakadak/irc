@@ -12,6 +12,7 @@
 
 #include <unistd.h>
 #include "inc/client.h"
+#include "libft/inc/libft.h"
 
 void	standard_input(t_env *e)
 {
@@ -21,7 +22,7 @@ void	standard_input(t_env *e)
 	if ((r = x_int(-1, read(STDIN_FILENO, buff, BUF_SIZE), "read")))
 	{
 		buff[r] = 0;
-		if (strnequ(buff, "/connect ", 9))
+		if (ft_strnequ(buff, "/connect ", 9))
 			e->sock = client_connect(e->sock, buff);
 		else if (e->sock == -1)
 			write(STDIN_FILENO, "Please connect to a server"

@@ -11,32 +11,38 @@
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "client.h"
-#include "libft.h"
+#include "inc/client.h"
+#include "libft/inc/libft.h"
 
 static void	init_fd(t_env *e)
 {
 	FD_ZERO(&e->fd_read);
 	FD_ZERO(&e->fd_write);
 	FD_SET(STDIN_FILENO, &e->fd_read);
-	FD_SET(e->sock, &e->fd_read);
-	if (*e->bwrite != 0)
-		FD_SET(e->sock, &e->fd_write);
+	if (e->sock != -1)
+	{
+		FD_SET(e->sock, &e->fd_read);
+		if (*e->bwrite != 0)
+			FD_SET(e->sock, &e->fd_write);
+	}
 }
 
 static void	do_select(t_env *e)
 {
-	select(e->sock + 1, &e->fd_read, &e->fd_write, NULL, NULL);
+	select(imax(e->sock + 1, 3), &e->fd_read, &e->fd_write, NULL, NULL);
 }
 
 static void	check_fd(t_env *e)
 {
-	if (FD_ISSET(e->sock, &e->fd_read))
-		client_read(e);
-	if (FD_ISSET(e->sock, &e->fd_write))
-		client_write(e);
 	if (FD_ISSET(STDIN_FILENO, &e->fd_read))
 		standard_input(e);
+	if (e->sock != -1)
+	{
+		if (FD_ISSET(e->sock, &e->fd_read))
+			client_read(e);
+		if (FD_ISSET(e->sock, &e->fd_write))
+			client_write(e);
+	}
 }
 
 void		main_loop(t_env *e)

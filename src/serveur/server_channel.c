@@ -22,6 +22,7 @@ void	join(int cs, t_env *e, char **aarg)
 		client_add(cs, e, "Invalid channel. (eg: #bananez)\n");
 	else
 	{
+		ft_bzero(nuff, NICK_SIZE + 21);
 		ft_strncpy(e->fds[cs].channel, aarg[1], CHAN_SIZE);
 		ft_strcat(ft_strcat(nuff, e->fds[cs].nick), " joined the channel.\n");
 		spread(cs, e, nuff, 0);
@@ -68,6 +69,7 @@ void	leave(int cs, t_env *e, char **aarg)
 			return ;
 		}
 	}
+	ft_bzero(nuff, NICK_SIZE + 19);
 	ft_strcat(ft_strcat(nuff, e->fds[cs].nick), " left the channel.\n");
 	spread(cs, e, nuff, 0);
 	*e->fds[cs].channel = -1;

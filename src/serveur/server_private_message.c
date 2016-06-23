@@ -44,6 +44,7 @@ void	msg(int cs, t_env *e, char **arg)
 			client_add(cs, e, "Invalid nickname.\n");
 		else
 		{
+			ft_bzero(nuff, BUF_SIZE + 1);
 			i = 2;
 			ft_strcat(ft_strcat(nuff, "from "), e->fds[cs].nick);
 			ft_strcat(nuff, ":");
