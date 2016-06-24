@@ -12,7 +12,7 @@
 
 #include "inc/server.h"
 
-int		get_dest(t_env *e, char *target)
+int			get_dest(t_env *e, char *target)
 {
 	int	i;
 
@@ -28,11 +28,39 @@ int		get_dest(t_env *e, char *target)
 	return (-1);
 }
 
-void	msg(int cs, t_env *e, char **arg)
+static void	from(int og, int tg, t_env *e, char **msg)
+{
+	char	nuff[BUF_SIZE + 1];
+	int		i;
+
+	ft_bzero(nuff, BUF_SIZE + 1);
+	i = 0;
+	ft_strcat(ft_strcat(ft_strcat(nuff, "from "), e->fds[og].nick), ":");
+	while (msg[i])
+	{
+		ft_strcat(ft_strcat(nuff, " "), msg[i++]);
+	}
+	client_add(tg, e, ft_strcat(nuff, "\n"));
+}
+
+static void	to(int og, int tg, t_env *e, char **msg)
+{
+	char	nuff[BUF_SIZE + 1];
+	int		i;
+
+	ft_bzero(nuff, BUF_SIZE + 1);
+	i = 0;
+	ft_strcat(ft_strcat(ft_strcat(nuff, "to "), e->fds[tg].nick), ":");
+	while (msg[i])
+	{
+		ft_strcat(ft_strcat(nuff, " "), msg[i++]);
+	}
+	client_add(og, e, ft_strcat(nuff, "\n"));
+}
+
+void		msg(int cs, t_env *e, char **arg)
 {
 	int		dest;
-	int		i;
-	char	nuff[BUF_SIZE + 1];
 
 	if (arg[1] == NULL)
 		client_add(cs, e, "Destination and message missing.\n");
@@ -44,15 +72,8 @@ void	msg(int cs, t_env *e, char **arg)
 			client_add(cs, e, "Invalid nickname.\n");
 		else
 		{
-			ft_bzero(nuff, BUF_SIZE + 1);
-			i = 2;
-			ft_strcat(ft_strcat(nuff, "from "), e->fds[cs].nick);
-			ft_strcat(nuff, ":");
-			while (arg[i])
-			{
-				ft_strcat(ft_strcat(nuff, " "), arg[i++]);
-			}
-			client_add(dest, e, ft_strcat(nuff, "\n"));
+			from(cs, dest, e, arg + 2);
+			to(cs, dest, e, arg + 2);
 		}
 	}
 }
