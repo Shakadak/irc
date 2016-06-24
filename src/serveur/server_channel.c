@@ -18,10 +18,16 @@ void	join(int cs, t_env *e, char **aarg)
 
 	if (aarg[1] == NULL)
 		client_add(cs, e, "Channel missing.\n");
-	else if (*aarg[1] != '#')
+	else if (*aarg[1] != '#' || aarg[1][1] == '\0')
 		client_add(cs, e, "Invalid channel. (eg: #bananez)\n");
 	else
 	{
+		if (*e->fds[cs].channel != -1)
+		{
+			ft_bzero(nuff, NICK_SIZE + 21);
+			ft_strcat(ft_strcat(nuff, e->fds[cs].nick), " left the channel.\n");
+			spread(cs, e, nuff, 0);
+		}
 		ft_bzero(nuff, NICK_SIZE + 21);
 		ft_strncpy(e->fds[cs].channel, aarg[1], CHAN_SIZE);
 		ft_strcat(ft_strcat(nuff, e->fds[cs].nick), " joined the channel.\n");

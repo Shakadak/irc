@@ -21,7 +21,7 @@ void		spread(int cs, t_env *e, char *msg, int first)
 	int		i;
 	char	*chan;
 
-	if (*e->fds[cs].channel < 0)
+	if (*e->fds[cs].channel == -1)
 	{
 		if (first)
 			client_add(cs, e, "Please, join a channel.\n");
@@ -39,6 +39,14 @@ void		spread(int cs, t_env *e, char *msg, int first)
 
 void		client_leave(int cs, t_env *e, char **aarg)
 {
+	char	nuff[NICK_SIZE + 19];
+
+	if (*e->fds[cs].channel != -1)
+	{
+		ft_bzero(nuff, NICK_SIZE + 19);
+		ft_strcat(ft_strcat(nuff, e->fds[cs].nick), " left the channel.\n");
+		spread(cs, e, nuff, 0);
+	}
 	(void)aarg;
 	close(cs);
 	rb_free(&e->fds[cs].q);
