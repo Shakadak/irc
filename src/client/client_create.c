@@ -10,12 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <netdb.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
-#include "libft.h"
-#include "client.h"
+#include "libft/inc/libft.h"
+#include "inc/client.h"
 
 int	create_client(char *addr, int port)
 {
@@ -35,6 +37,10 @@ int	create_client(char *addr, int port)
 	sin.sin_port = htons(port);
 	sin.sin_addr.s_addr = inet_addr(addr);
 	if (connect(sock, (const struct sockaddr *)&sin, sizeof(sin)) == -1)
-		return (x_int(-1, -1, "connect"));
+	{
+		fprintf(stderr, "%s error: %s\n", "connect", strerror(errno));
+		close(sock);
+		return (-1);
+	}
 	return (sock);
 }
