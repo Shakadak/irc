@@ -56,7 +56,7 @@ LINK	=	$(CC) -o $@ $^ $(L_FLAG)
 
 .PHONY: all clean fclean re
 
-all: $(PLIB) $(SERVEUR) $(CLIENT)
+all: $(SERVEUR) $(CLIENT)
 
 ### LIBFT ###
 
@@ -74,10 +74,10 @@ $(POBJCLI): |$(DIROBJ)
 
 ### EXECUTABLE ###
 
-$(CLIENT): $(POBJCLI)
+$(CLIENT): $(PLIB) $(POBJCLI)
 	$(LINK)
 
-$(SERVEUR): $(POBJSRV)
+$(SERVEUR): $(PLIB) $(POBJSRV)
 	$(LINK)
 
 ### CLEAN UP ###

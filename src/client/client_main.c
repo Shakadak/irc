@@ -39,11 +39,19 @@ int			main(int argc, char **argv)
 
 	ft_bzero(&e, sizeof(t_env));
 	e.sock = -1;
-	if ((argc == 3 && !ft_isnum(argv[2])) || argc > 3)
+	if ((argc == 3 && !ft_isnum(argv[2])) || argc == 2 || argc > 3)
+	{
 		return (usage(argv[0]));
+	}
 	else if (argc == 3)
+	{
 		if ((e.sock = create_client(argv[1], ft_atoi(argv[2]))) == -1)
 			return (-1);
+	}
+	else
+	{
+		ft_putendl("You may connect to a server using /connect");
+	}
 	main_loop(&e);
 	close(e.sock);
 	return (0);
